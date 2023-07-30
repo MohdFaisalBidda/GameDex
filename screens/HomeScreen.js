@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Bars3BottomLeftIcon,
@@ -14,12 +14,22 @@ import {
 import TrendingGames from "../components/trendingGames";
 import GamesList from "../components/gamesList";
 import { useNavigation } from "@react-navigation/native";
+import { fetchTrendingGames } from "../api/gamesdb";
 
 export default function HomeScreen() {
-  const [trending,setTrending]=useState([]);
-  const [upcoming,setUpcoming]=useState([]);
-  const [topRated,setTopRated]=useState([]);
+  const [trending, setTrending] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
+  const [topRated, setTopRated] = useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let games = await fetchTrendingGames();
+      console.log(games);
+    };
+    fetchData();
+  }, []);
+
   return (
     <View className="flex-1 bg-slate-900">
       <SafeAreaView>
@@ -28,7 +38,12 @@ export default function HomeScreen() {
           <Bars3BottomLeftIcon size="30" color="red" />
           <Text className="text-white text-xl font-bold">GameHouse</Text>
           <TouchableOpacity>
-            <MagnifyingGlassCircleIcon size="30" strokeWidth={2} color="red"  onPress={()=>navigation.navigate("Search")}/>
+            <MagnifyingGlassCircleIcon
+              size="30"
+              strokeWidth={2}
+              color="red"
+              onPress={() => navigation.navigate("Search")}
+            />
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -38,13 +53,13 @@ export default function HomeScreen() {
         contentContainerStyle={{ paddingBottom: 10 }}
       >
         {/* Trending Games */}
-        <TrendingGames data={trending}/>
+        <TrendingGames data={trending} />
 
         {/* Upcoming Games */}
-        <GamesList title={"Upcoming"}  data={upcoming}/>
+        <GamesList title={"Upcoming"} data={upcoming} />
 
         {/* Top Rated Games  */}
-        <GamesList title={"Top Rated"}  data={upcoming}/>
+        <GamesList title={"Top Rated"} data={upcoming} />
       </ScrollView>
     </View>
   );
