@@ -27,15 +27,15 @@ export default function GamesList({ title, data, hideSeeAll }) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15 }}
       >
-        {[...new Array(4)].map((item, index) => {
+        {data?.map((item, index) => {
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => navigation.push("Game", index)}
+              onPress={() => navigation.push("Game", {gameData:item})}
             >
               <View className="space-y-1 mr-4">
                 <Image
-                  source={require("../assets/adaptive-icon.png")}
+                  source={require("../assets/fortnite.webp")}
                   className="rounded-3xl bg-white"
                   style={{ width: width * 0.5, height: height * 0.2 }}
                 />

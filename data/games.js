@@ -1,0 +1,42 @@
+export const games = [
+  {
+    id: 1,
+    image: "game1.jpg",
+    name: "Game One",
+    desc:"",
+    releasedAt:"2024",
+    categories: ["Action", "Adventure", "Puzzle", "Simulation"],
+  },
+  {
+    id: 2,
+    image: "game2.jpg",
+    name: "Game Two",
+    desc:"desc",
+    releasedAt:"2024",
+    categories: ["Strategy", "Racing", "Role-Playing", "Sports"],
+  },
+  {
+    id: 3,
+    image: "game3.jpg",
+    name: "Game Three",
+    desc:"",
+    releasedAt:"2024",
+    categories: ["Action", "Simulation", "Strategy", "Puzzle"],
+  },
+  {
+    id: 4,
+    image: "game4.jpg",
+    name: "Game Four",
+    desc:"",
+    releasedAt:"2024",
+    categories: ["Adventure", "Role-Playing", "Sports", "Racing"],
+  },
+  {
+    id: 5,
+    image: "game5.jpg",
+    name: "Game Five",
+    desc:"",
+    releasedAt:"2024",
+    categories: ["Puzzle", "Action", "Simulation", "Strategy"],
+  },
+];

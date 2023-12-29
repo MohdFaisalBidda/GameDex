@@ -13,16 +13,16 @@ let { width, height } = Dimensions.get("window");
 
 export default function TrendingGames({ data }) {
   const navigation = useNavigation();
-
+  console.log(data);
   return (
     <View className="my-8">
       <Text className="text-white text-xl mx-4 mb-5 font-bold">Trending</Text>
       <Carousel
-        data={[...new Array(3)]}
+        data={data}
         renderItem={({ item }) => (
           <GameCard
             item={item}
-            handleClick={() => navigation.navigate("Game")}
+            handleClick={() => navigation.navigate("Game",{gameData:item})}
           />
         )}
         firstItem={1}

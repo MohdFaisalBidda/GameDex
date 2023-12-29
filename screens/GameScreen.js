@@ -23,7 +23,8 @@ let { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
 const topMargin = ios ? "" : " mt-12";
 
-export default function GameScreen({hideSeeAll}) {
+export default function GameScreen({route}) {
+  const {gameData} =route.params;
   const [favourite, setFavourite] = useState(false);
   const [developer,setDeveloper] = useState([1,2,3,4])
   const navigate = useNavigation();
@@ -67,17 +68,17 @@ export default function GameScreen({hideSeeAll}) {
 
       <View style={{ marginTop: -(height * 0.09) }} className="space-y-3">
         <Text className="text-white text-center text-3xl font-bold tracking-wider">
-          GTA 5
+          {gameData.name}
         </Text>
         <Text className="text-neutral-400 font-semibold text-base text-center">
-          Released  2020
+          Released  {gameData.releasedAt}
         </Text>
         <View className="flex-row justify-center  mx-4 space-x-2">
-          <Text className="text-neutral-400 font-semibold text-base text-center">Action .</Text>
-          <Text className="text-neutral-400 font-semibold text-base text-center">Open World .</Text>
-          <Text className="text-neutral-400 font-semibold text-base text-center">Thrill</Text>
+          {gameData.categories.map((cat,index)=>(
+          <Text className="text-neutral-400 font-semibold text-base text-center">{cat} {index < gameData.categories.length-1 && "."}</Text>
+          ))}
         </View>
-        <Text className="mx-4 text-neutral-400 tracking-wide">React Navigation's native stack navigator provides a way for your app to transition between screens and manage navigation history. If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. A key difference between how this works in a web browser and in React Navigation is that React Navigation's native stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.</Text>
+        <Text className="mx-4 text-neutral-400 tracking-wide">{gameData.desc}</Text>
       </View>
 
       <DeveloperList developer={developer}/>

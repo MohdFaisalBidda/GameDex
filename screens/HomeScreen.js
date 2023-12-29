@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Bars3BottomLeftIcon,
@@ -14,12 +14,20 @@ import {
 import TrendingGames from "../components/trendingGames";
 import GamesList from "../components/gamesList";
 import { useNavigation } from "@react-navigation/native";
+// import { fetchTrendingGames } from "../api/gamesdb";
+import { games } from "../data/games";
 
 export default function HomeScreen() {
   const [trending,setTrending]=useState([]);
   const [upcoming,setUpcoming]=useState([]);
   const [topRated,setTopRated]=useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const data = games;
+    setTrending(data);
+  }, []);
+
   return (
     <View className="flex-1 bg-slate-900">
       <SafeAreaView>
@@ -41,10 +49,10 @@ export default function HomeScreen() {
         <TrendingGames data={trending}/>
 
         {/* Upcoming Games */}
-        <GamesList title={"Upcoming"}  data={upcoming}/>
+        <GamesList title={"Upcoming"} data={trending} />
 
         {/* Top Rated Games  */}
-        <GamesList title={"Top Rated"}  data={upcoming}/>
+        <GamesList title={"Top Rated"} data={trending} />
       </ScrollView>
     </View>
   );
